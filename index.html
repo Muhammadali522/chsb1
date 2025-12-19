@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Экзаменационный симулятор</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    
+    
+    <!-- МЕНЮ ПРЕДМЕТОВ -->
+    <div id="menuScreen" class="screen center active">
+        <h1>Выбор теста</h1>
+        <div class="cards" id="cards"></div>
+    </div>
+    
+    <!-- ОПИСАНИЕ ТЕСТА -->
+    <div id="infoScreen" class="screen center">
+        <div class="info-card">
+            <h2 id="infoTitle"></h2>
+            <p id="infoDesc"></p>
+            <ul id="infoStats"></ul>
+            <button id="startWarn" class="primary">Начать</button>
+            <button id="backMenu">Назад</button>
+        </div>
+    </div>
+    
+    <!-- ПРЕДУПРЕЖДЕНИЕ -->
+    <div id="warnScreen" class="screen center">
+        <h2>⚠ Внимание</h2>
+        <p>
+            Тест будет запущен в полноэкранном режиме.<br>
+            При выходе из окна, смене вкладки или сворачивании —
+            тест будет немедленно завершён.
+        </p>
+        <button id="startTest" class="danger">Я понимаю, начать тест</button>
+    </div>
+    
+    <!-- ТЕСТ -->
+    <div id="testScreen" class="screen center">
+        <div class="top-bar">
+            <span>⏱ <b id="timer">01:00:00</b></span>
+            <span>Вопрос <b id="qIndex">1</b> / 30</span>
+            <button id="finishBtn" class="danger">Завершить</button>
+        </div>
+        
+        <div class="main">
+            <div class="question-area">
+                <h2 id="questionText"></h2>
+                <div id="answers" class="answers"></div>
+                <div class="nav-buttons">
+                    <button id="prevQ">Назад</button>
+                    <button id="nextQ">Вперёд</button>
+                </div>
+            </div>
+            <div class="nav-area" id="nav"></div>
+        </div>
+    </div>
+    
+    <!-- РЕЗУЛЬТАТ -->
+    <div id="resultScreen" class="screen center">
+        <h1>Результаты</h1>
+        <ul>
+            <li>✅ Правильных: <b id="rCorrect"></b></li>
+            <li>❌ Неправильных: <b id="rWrong"></b></li>
+            <li>⚪ Не решено: <b id="rEmpty"></b></li>
+            <li>📊 Процент: <b id="rPercent"></b>%</li>
+            <li>⏱ Время: <b id="rTime"></b></li>
+        </ul>
+        <button id="retry" class="primary">Пересдать</button>
+        <button id="toMenu">В меню</button>
+    </div>
+    
+    <!-- БЛОК -->
+    <div id="blockScreen" class="screen center">
+        <h1>❌ Тест остановлен</h1>
+        <p>Потеря фокуса или выход из полноэкранного режима.</p>
+        <button onclick="location.reload()" class="primary">В меню</button>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>

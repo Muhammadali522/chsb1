@@ -1,0 +1,124 @@
+/* ---------- Общие стили ---------- */
+* { box-sizing:border-box; font-family:Arial, sans-serif; }
+body { 
+    margin:0; 
+    background: linear-gradient(135deg,#eef2ff,#f8fafc); 
+    overflow:hidden; /* убираем скролл страницы */
+}
+
+.screen { display:none; min-height:100vh; padding:30px; }
+.screen.active { display:flex; flex-direction:column; align-items:center; justify-content:center; }
+
+.center { text-align:center; }
+
+button { 
+    padding:12px 20px; 
+    margin:6px; 
+    border:none; 
+    border-radius:8px; 
+    font-size:16px; 
+    cursor:pointer; 
+}
+.primary { background:#2563eb; color:#fff; transition:0.2s; }
+.primary:hover { background:#1d4ed8; }
+.danger { background:#dc2626; color:#fff; transition:0.2s; }
+.danger:hover { background:#b91c1c; }
+
+/* ---------- Меню карточек ---------- */
+.cards {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px; width:100%; max-width:1100px; justify-items:center;
+}
+
+.card {
+    background:#fff; border-radius:14px; padding:20px; text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s;
+}
+.card:hover { transform: translateY(-5px); }
+.card .img { 
+    height:100px; 
+    border-radius:10px; 
+    background:linear-gradient(135deg,#93c5fd,#6366f1); 
+    margin-bottom:10px; 
+}
+
+.info-card { 
+    background:#fff; padding:30px; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.15); 
+    max-width:420px; text-align:center; 
+}
+
+/* ---------- Header теста ---------- */
+.top-bar {
+    position: fixed; top: 0; left: 0; width: 100%;
+    background:#111827; color:white; padding:10px 20px;
+    display:flex; justify-content:space-between; align-items:center;
+    z-index:1000; font-size:18px; border-bottom:2px solid #2563eb;
+    flex-wrap:wrap; /* кнопка "Завершить" не уходит */
+}
+
+/* ---------- Основная область теста ---------- */
+.main {
+    display:flex; justify-content:space-around; width:100%; margin-top:80px;
+    height: calc(100vh - 100px);
+}
+
+/* Левая колонка (вопросы) */
+.question-area {
+    width:60%; padding:20px; display:flex; flex-direction:column; align-items:center;
+}
+
+/* Кнопки ответов */
+.answers {
+    display:grid; grid-template-columns:repeat(2,1fr); gap:10px; width:100%; margin-top:20px;
+}
+.answers button {
+    width:100%; padding:14px; border-radius:8px; background:#e5e7eb; font-weight:bold;
+    transition:0.2s; font-size:16px;
+}
+.answers .correct { background:#86efac; }   /* правильный ответ */
+.answers .wrong { background:#fca5a5; }     /* неправильный ответ */
+.answers .disabled { cursor:not-allowed; }
+
+/* Навигация Назад/Вперёд */
+.nav-buttons {
+    display:flex; justify-content:center; margin-top:20px; gap:20px;
+}
+.nav-buttons button {
+    padding:10px 20px; border-radius:8px; font-size:16px;
+}
+
+/* Правая колонка (кнопки всех вопросов) */
+.nav-area {
+    width:30%; padding:20px; 
+    display:grid; 
+    grid-template-columns:repeat(5, 50px); /* 5 кнопок в ряду */
+    gap:10px 15px; /* горизонтальный и вертикальный отступ */
+    justify-content:center; 
+    height:100%; 
+    overflow-y:auto;
+}
+
+
+
+.nav-area button {
+    width:50px; 
+    height:50px; 
+    border-radius:8px; 
+    font-size:16px; 
+    font-weight:bold;
+    padding:0; 
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:0.2s;
+}
+.nav-area button.unanswered { background:#d1d5db; }
+.nav-area button.current { background:#fde68a; }
+.nav-area button.correct { background:#4ade80; }
+.nav-area button.wrong { background:#f87171; }
+
+/* ---------- Блокировка и результат ---------- */
+#blockScreen { background:#fff5f5; color:#dc2626; }
+#resultScreen ul { list-style:none; padding:0; font-size:18px; }
+#resultScreen li { margin:10px 0; }
