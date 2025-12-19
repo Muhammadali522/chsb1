@@ -6,11 +6,27 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    
-    
+    <!-- ЭКРАН ВВОДА ИМЕНИ -->
+    <div id="loginScreen" class="screen center">
+        <div class="info-card">
+            <h2>👋 Привет!</h2>
+            <p>Введите ваше имя, чтобы начать тест:</p>
+            <input type="text" id="userNameInput" placeholder="Ваше имя" style="width:100%; padding:12px; font-size:16px; margin-bottom:20px; border-radius:8px; border:1px solid #ccc;">
+            <button id="loginBtn" class="primary">Начать</button>
+        </div>
+    </div>
+
     <!-- МЕНЮ ПРЕДМЕТОВ -->
-    <div id="menuScreen" class="screen center active">
+     <header class="menu-header">
+    <h1>📚 Экзаменационный симулятор</h1>
+    <div>
+    <button id="changeName" class="primary">Сменить имя</button>
+    </div>
+</header>
+
+    <div id="menuScreen" class="screen center">
         <h1>Выбор теста</h1>
+
         <div class="cards" id="cards"></div>
     </div>
     
@@ -28,11 +44,8 @@
     <!-- ПРЕДУПРЕЖДЕНИЕ -->
     <div id="warnScreen" class="screen center">
         <h2>⚠ Внимание</h2>
-        <p>
-            Тест будет запущен в полноэкранном режиме.<br>
-            При выходе из окна, смене вкладки или сворачивании —
-            тест будет немедленно завершён.
-        </p>
+        <p>Тест будет запущен в полноэкранном режиме.<br>
+        При выходе из окна, смене вкладки или сворачивании — тест будет немедленно завершён.</p>
         <button id="startTest" class="danger">Я понимаю, начать тест</button>
     </div>
     
@@ -43,7 +56,6 @@
             <span>Вопрос <b id="qIndex">1</b> / 30</span>
             <button id="finishBtn" class="danger">Завершить</button>
         </div>
-        
         <div class="main">
             <div class="question-area">
                 <h2 id="questionText"></h2>
@@ -77,7 +89,7 @@
         <p>Потеря фокуса или выход из полноэкранного режима.</p>
         <button onclick="location.reload()" class="primary">В меню</button>
     </div>
-    
+
     <script src="main.js"></script>
 </body>
 </html>
