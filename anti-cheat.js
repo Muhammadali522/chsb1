@@ -12,7 +12,7 @@
     blockOnPaste: true,
     blockOnCut: true,
     blockOnContextMenu: true,
-    blockOnSelection: true,
+    blockOnSelection: false,
     blockOnPrint: true,
     blockOnDrag: true,
     blockOnBeforeUnload: false
@@ -133,9 +133,9 @@
       if (cfg.blockOnContextMenu) { e.preventDefault(); violation("CONTEXT_MENU"); }
     }, true);
 
-    add(document, "selectstart", e => {
-      emit("TEXT_SELECTION_ATTEMPT");
-      if (cfg.blockOnSelection) { e.preventDefault(); violation("TEXT_SELECTION"); }
+    // Text selection is allowed. It is no longer treated as a violation.
+    add(document, "selectstart", () => {
+      emit("TEXT_SELECTION_ALLOWED");
     }, true);
 
     add(document, "dragstart", e => {
