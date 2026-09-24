@@ -1,0 +1,5 @@
+{
+  "name":"chsb1-exam-api",
+  "private":true,
+  "scripts":{"start":"node server.js"}
+}
