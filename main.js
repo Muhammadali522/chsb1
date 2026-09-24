@@ -86,10 +86,12 @@ function startExam() {
     timeLeft = currentSubject.time;
     current = 0;
     active = true;
+    window.__examAntiCheatBlock = block;
     show("test");
     startTimer();
     createNav();
     showQuestion();
+    if (window.ExamAntiCheat) ExamAntiCheat.start();
 }
 
 // ----------------- ВОПРОСЫ -----------------
@@ -169,6 +171,8 @@ function startTimer(){
 // ----------------- ЗАВЕРШЕНИЕ -----------------
 finishBtn.onclick=finish;
 function finish(){
+    if (!active) return;
+    if (window.ExamAntiCheat) ExamAntiCheat.stop();
     clearInterval(timer);
     active=false;
     let c=0,w=0,e=0;
@@ -192,11 +196,17 @@ function finish(){
 retry.onclick=startExam;
 toMenu.onclick=openMenu;
 
-// ----------------- БЛОКИРОВКА -----------------
-window.addEventListener("blur", block);
-document.addEventListener("visibilitychange",()=>{if(document.hidden) block();});
-document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement) block();});
-function block(){ if(!active) return; clearInterval(timer); show("block"); }
+// ----------------- АНТИЧИТ -----------------
+function block(reason = "Нарушение правил экзамена"){
+    if(!active) return;
+    if (window.ExamAntiCheat) {
+        active = false;
+        ExamAntiCheat.stop();
+    }
+    clearInterval(timer);
+    sendBlockNotification(reason);
+    show("block");
+}
 
 // ----------------- УТИЛИТЫ -----------------
 function show(name){ Object.values(screens).forEach(s=>s.classList.remove("active")); screens[name].classList.add("active"); }
