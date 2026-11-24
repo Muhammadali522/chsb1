@@ -48,7 +48,7 @@
   // ---- 2. Состояние в замыкании, наружу ничего изменяемого ----
   const cfg = {
     eventEndpoint: null, heartbeatEndpoint: null, sessionId: null,
-    heartbeatMs: 2000, rafGapMs: 1500, onBlock: null
+    heartbeatMs: 500, rafGapMs: 1500, onBlock: null
   };
   let active = false, seq = 0, started = 0, blocked = false;
   let lastRaf = N.now();
@@ -176,6 +176,7 @@
       if (!baselineAttrs) startDomWatch();
       if (!hbStarted) { hbStarted = true; startHeartbeat(); }
       integrityCheck();
+      if (!active || blocked) return;
       emit("EXAM_STARTED");
     },
     stop() { emit("EXAM_STOPPED"); active = false; },
