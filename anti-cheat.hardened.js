@@ -93,7 +93,11 @@
   // уже не окажется перед ними в очереди обработчиков.
   const on = (target, type, fn) => N.addEventListener.call(target, type, fn, true);
 
-  on(window, "blur", (e) => { if (active) violation("FOCUS_LOST", { trusted: e.isTrusted }); });
+  on(window, "blur", (e) => {
+    if (active && e.target === window && !N.hasFocus.call(document)) {
+      violation("FOCUS_LOST", { trusted: e.isTrusted });
+    }
+  });
   on(document, "visibilitychange", () => { if (active && call(hiddenGetter)) violation("VISIBILITY_HIDDEN"); });
   on(document, "fullscreenchange", () => { if (active && !call(fsGetter)) violation("FULLSCREEN_EXIT"); });
   on(window, "offline", () => { if (active) emit("NETWORK_OFFLINE", {}, "VIOLATION"); });
