@@ -266,6 +266,16 @@ function block(reason = "Нарушение правил экзамена"){
     clearInterval(timer);
     sendBlockNotification(reason);
     show("block");
+    const messages = {
+        FOCUS_LOST: "Окно экзамена потеряло фокус.",
+        VISIBILITY_HIDDEN: "Вкладка экзамена стала неактивной.",
+        FULLSCREEN_EXIT: "Выход из полноэкранного режима.",
+        FULLSCREEN_NOT_ACTIVE: "Не удалось подтвердить полноэкранный режим.",
+        TAMPERING_DETECTED: "Обнаружено изменение функций браузера. Проверьте расширения.",
+        SECURITY_UNAVAILABLE: "Модуль проверки не загрузился. Обновите страницу."
+    };
+    const p = document.querySelector("#blockScreen p");
+    if (p) p.textContent = messages[reason] || "Нарушение условий экзамена. Повторите попытку.";
 }
 
 // ----------------- УТИЛИТЫ -----------------
