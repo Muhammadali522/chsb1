@@ -20,8 +20,7 @@ nextQ.onclick = () => { if(current<questions.length-1) current++; showQuestion()
 // ----------------- ЛОГИН -----------------
 let userName = localStorage.getItem("userName") || "";
 
-if(!userName) show("login");
-else openMenu();
+
 
 document.getElementById("loginBtn").onclick = () => {
     const input = document.getElementById("userNameInput");
@@ -54,7 +53,7 @@ function openMenu() {
         cards.appendChild(card);
     });
 }
-openMenu();
+if(!userName) show("login"); else openMenu();
 
 // ----------------- ОПИСАНИЕ -----------------
 function openInfo(subj) {
@@ -71,7 +70,7 @@ startWarn.onclick = () => show("warn");
 startTest.onclick = async () => {
     try {
         await document.documentElement.requestFullscreen();
-    } catch (_) {}
+    } catch (_) { return alert("Не удалось включить полноэкранный режим."); }
     sendStartNotification();
     startExam();
 };
@@ -87,7 +86,10 @@ function startExam() {
     createNav();
     showQuestion();
 
-    if (window.ExamAntiCheat) ExamAntiCheat.start();
+    if (window.ExamAntiCheat) {
+        ExamAntiCheat.configure({onBlock: block});
+        ExamAntiCheat.start();
+    } else { block("SECURITY_UNAVAILABLE"); return; }
 
     if (!document.fullscreenElement) {
         block("FULLSCREEN_NOT_ACTIVE");
@@ -197,7 +199,7 @@ function finish(){
     sendResultNotification();
     show("result");
 }
-retry.onclick=startExam;
+retry.onclick=()=>show("warn");
 toMenu.onclick=openMenu;
 
 // ----------------- УВЕДОМЛЕНИЯ -----------------
